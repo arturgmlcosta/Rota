@@ -1,18 +1,14 @@
 '''
 Separated from main for clarity and versatility. Only holds generate()
 '''
-def generate(filename,keys):
+def generate(filename):
 	'''
 	Creates list of dictionaries 'staff' that holds all relevant information in the input file, and exports it into a new module.
-	Requires second argument that is list of dictionary keys. Hours and staff are held in the function.
 	'''
 	if filename.split('.')[1] != "csv" or not os.path.isfile(filename):
 		return
 	out = []
-	if keys == staff:
-		keys = ['skills','max hours','days off']
-	if keys == hours:
-		keys = ['week day','start','end','skills']
+	keys = ['week day','start','end','skills']
 	with open(filename) as file:
 		for line in file:
 			contents = line.split(' ')
@@ -20,10 +16,14 @@ def generate(filename,keys):
 			if len(contents) == 1:
 				return
 			try:
-				out[contents[0]] = {i:j for i in keys for j in contents[1:]}
+				out.append({contents[0] = {i:j for i in keys for j in contents[1:]}})
 			except:
 				print ('Input file contents in wrong format.')
 				return
-	with open ('dir.py','w+') as file:
+	
+	days = ['Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday']
+	out = {i:j for i in days for j in out if j['week day'] == i}
+	
+	with open ('hours_dir.py','w') as file:
 		file.write(out)
 	return out
