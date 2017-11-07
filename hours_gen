@@ -7,7 +7,7 @@ def generate(filename):
 	'''
 	if filename.split('.')[1] != "csv" or not os.path.isfile(filename):
 		return
-	out = []
+	hours = []
 	keys = ['week day','start','end','skills']
 	with open(filename) as file:
 		for line in file:
@@ -16,14 +16,14 @@ def generate(filename):
 			if len(contents) == 1:
 				return
 			try:
-				out.append({contents[0] = {i:j for i in keys for j in contents[1:]}})
+				hours.append({contents[0] = {i:j for i in keys for j in contents[1:]}})
 			except:
 				print ('Input file contents in wrong format.')
 				return
 	
 	days = ['Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday']
-	out = {i:j for i in days for j in out if j['week day'] == i}
+	hours = {i:j for i in days for j in hours if j['week day'] == i}
 	
 	with open ('hours_dir.py','w') as file:
-		file.write(out)
-	return out
+		file.write(hours)
+	return hours
