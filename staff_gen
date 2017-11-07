@@ -8,7 +8,7 @@ def generate(filename):
 	'''
 	if filename.split('.')[1] != "csv" or not os.path.isfile(filename):
 		return
-	out = []
+	staff = []
   
 	keys = ['skills','max hours','days off']
   
@@ -25,8 +25,8 @@ def generate(filename):
 				return
 	
 	for i in out:
-		out[i]['current hours'] = 0
+		staff[i]['current hours'] = 0
 	
 	with open ('hours_dir.py','w') as file:
-		file.write(out)
-	return out
+		file.write(staff)
+	return staff
