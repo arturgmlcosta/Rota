@@ -1,28 +1,47 @@
 '''
-Separated from main for clarity and versatility. Only holds generate()
+Separated from main for clarity and versatility. 
 '''
-def generate(filename):
+
+hours = []
+
+class Shift(object):
+	'''a class that creates shifts from csv data'''
+	def __init__(self, name, 
+
+def generate(filename,delimiter=',',minordelimiter=' '):
 	'''
 	Creates list of dictionaries 'staff' that holds all relevant information in the input file, and exports it into a new module.
+	If delimiter is not ',', please specify as second argument *as string*.
 	'''
 	if type(filename) != str:
+		with open('error hours_gen.txt','w') as f:
+			f.write('Function called with incorrect format filename. Please retry with string.')
 		return
 	elif filename.split('.')[1] != "csv":
+		with open('error hours_gen.txt','w') as f:
+			f.write('Function called with file extension different than expected (.csv).')
 		return
 	elif not os.path.isfile(filename):
+		with open('error hours_gen.txt','w') as f:
+			f.write('Could not find input file.')
 		return
-	hours = []
-	keys = ['week day','start','end','skills']
+	elif type(delimeter) != str:
+		with open('error hours_gen.txt','w') as f:
+			f.write('Delimiter argument not in string format.')
+		return
+	#keys = ['week day','start','end','skills']
 	with open(filename) as file:
+		keys = file.readline().split(delimiter)
 		for line in file:
-			contents = line.split(' ')
-			contents = [i.split(',') for i in contents]
+			contents = line.split(delimiter)
+			contents = [i.split(minordelimiter) for i in contents]
 			if len(contents) == 1:
 				return
 			try:
 				hours.append({contents[0] = {i:j for i in keys for j in contents[1:]}})
 			except:
-				print ('Input file contents in wrong format.')
+				with open('error hours_gen.txt', 'w') as f:
+					f.write('Input file contents in wrong format.')
 				return
 	
 	days = ['Thursday','Friday','Saturday','Sunday','Monday','Tuesday','Wednesday']
